@@ -12,7 +12,7 @@ services:
       DATABASE_CLIENT: sqlite
       DATABASE_FILENAME: .tmp/data.db
     ports:
-      - "1337:1337"
+      - "${BACKEND_PORT:-1337}:1337"
     volumes:
       - strapi-data:/app/.tmp
       - strapi-uploads:/app/public/uploads
@@ -32,7 +32,7 @@ services:
       # Server-to-server URL, used for SSR data fetching over the internal Docker network.
       STRAPI_INTERNAL_URL: http://backend:1337
     ports:
-      - "3002:3000"
+      - "${FRONTEND_PORT:-3002}:3000"
     depends_on:
       - backend
     networks:
