@@ -1,0 +1,14 @@
+node_modules
+dist
+.tmp
+.strapi
+.strapi-updater.json
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+README.md
+npm-debug.log
+public/uploads
+*.log

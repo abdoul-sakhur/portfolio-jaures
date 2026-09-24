@@ -1,0 +1,47 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: jaures-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 1337
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+    ports:
+      - "1337:1337"
+    volumes:
+      - strapi-data:/app/.tmp
+      - strapi-uploads:/app/public/uploads
+    networks:
+      - jaures-net
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL:-http://localhost:1337}
+    container_name: jaures-frontend
+    restart: unless-stopped
+    environment:
+      # Browser-facing URL (contact form, images) — must be reachable from outside Docker.
+      NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL:-http://localhost:1337}
+      # Server-to-server URL, used for SSR data fetching over the internal Docker network.
+      STRAPI_INTERNAL_URL: http://backend:1337
+    ports:
+      - "3002:3000"
+    depends_on:
+      - backend
+    networks:
+      - jaures-net
+
+networks:
+  jaures-net:
+    driver: bridge
+
+volumes:
+  strapi-data:
+  strapi-uploads:

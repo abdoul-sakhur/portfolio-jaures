@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "series",
+  "info": {
+    "singularName": "serie",
+    "pluralName": "series",
+    "displayName": "Series",
+    "description": "Groupes d'œuvres (séries artistiques)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "artworks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::artwork.artwork",
+      "mappedBy": "series"
+    }
+  }
+}

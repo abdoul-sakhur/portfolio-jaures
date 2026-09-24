@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "section_items",
+  "info": {
+    "singularName": "section-item",
+    "pluralName": "section-items",
+    "displayName": "Section Item",
+    "description": "Élément référencé par une section (œuvre, exposition ou citation)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "section": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::section.section",
+      "inversedBy": "items"
+    },
+    "artwork": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::artwork.artwork"
+    },
+    "exhibition": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::exhibition.exhibition"
+    },
+    "quote": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::quote.quote"
+    }
+  }
+}

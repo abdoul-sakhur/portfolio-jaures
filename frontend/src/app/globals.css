@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f6f4ec;
+  --paper-soft: #ece8d7;
+  --ink: #372f37;
+  --ink-soft: #6c606c;
+  --line: #dcd4b5;
+  --blue: #6089a9;
+  --blue-soft: #dce5ec;
+  --lilac: #a57384;
+  --lilac-soft: #e9e3e5;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-lilac: var(--lilac);
+  --color-lilac-soft: var(--lilac-soft);
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-karla);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-karla), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.prose-body :where(p) {
+  margin-bottom: 1em;
+  line-height: 1.7;
+}
+
+::selection {
+  background: var(--lilac);
+  color: var(--paper);
+}

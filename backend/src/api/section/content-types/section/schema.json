@@ -1,0 +1,83 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sections",
+  "info": {
+    "singularName": "section",
+    "pluralName": "sections",
+    "displayName": "Section",
+    "description": "Blocs de contenu flexible assemblés sur une page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "hero-bio",
+        "highlights-grid",
+        "distinction-banner",
+        "quote-block",
+        "exhibitions-timeline",
+        "gallery-grid",
+        "contact-cards"
+      ],
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "subtitle": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "content": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "order": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::section-item.section-item",
+      "mappedBy": "section"
+    },
+    "pages": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::page.page",
+      "mappedBy": "sections"
+    }
+  }
+}

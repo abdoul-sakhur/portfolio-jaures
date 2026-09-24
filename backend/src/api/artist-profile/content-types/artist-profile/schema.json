@@ -1,0 +1,83 @@
+{
+  "kind": "singleType",
+  "collectionName": "artist_profiles",
+  "info": {
+    "singularName": "artist-profile",
+    "pluralName": "artist-profiles",
+    "displayName": "Artist Profile",
+    "description": "Profil biographique de l'artiste"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "displayName": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "tagline": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "bio": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "portraitImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "galleryImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "bio.stat",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "highlights": {
+      "type": "component",
+      "repeatable": true,
+      "component": "bio.highlight",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

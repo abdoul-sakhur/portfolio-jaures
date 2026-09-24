@@ -1,0 +1,10 @@
+# Local Claude Code session state — not meant to be versioned
+.claude/
+
+# Source copy of the brochure PDF — the file actually served by the app lives
+# in frontend/public/brochure-jaures-agohi.pdf and is tracked there instead.
+frontend/pdf/
+
+# OS
+.DS_Store
+Thumbs.db
