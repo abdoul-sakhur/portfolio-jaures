@@ -18,6 +18,12 @@ services:
       - strapi-uploads:/app/public/uploads
     networks:
       - jaures-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jaures-backend.rule=Host(`${BACKEND_DOMAIN:-api.localhost}`)"
+      - "traefik.http.routers.jaures-backend.entrypoints=websecure"
+      - "traefik.http.routers.jaures-backend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.jaures-backend.loadbalancer.server.port=1337"
 
   frontend:
     build:
@@ -37,6 +43,12 @@ services:
       - backend
     networks:
       - jaures-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jaures-frontend.rule=Host(`${FRONTEND_DOMAIN:-localhost}`)"
+      - "traefik.http.routers.jaures-frontend.entrypoints=websecure"
+      - "traefik.http.routers.jaures-frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.jaures-frontend.loadbalancer.server.port=3000"
 
 networks:
   jaures-net:

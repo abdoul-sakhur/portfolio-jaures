@@ -1,0 +1,19 @@
+# Production overlay: applied on top of docker-compose.yml on servers that
+# front the app with an existing Traefik reverse proxy (HTTPS, domain routing).
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# Traefik reaches each container directly over the Docker bridge network (see
+# the `traefik.*` labels in docker-compose.yml), so the host ports below are
+# bound to loopback only — reachable for local debugging (e.g. via an SSH
+# tunnel) but never exposed to the internet directly, avoiding a duplicate,
+# unencrypted path to the app alongside the HTTPS one Traefik provides.
+services:
+  backend:
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-1337}:1337"
+
+  frontend:
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-3002}:3000"

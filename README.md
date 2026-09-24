@@ -138,3 +138,28 @@ de l'image frontend n'exige pas que le backend tourne pendant `docker build`.
 
 Volumes persistants : `strapi-data` (base SQLite) et `strapi-uploads` (médias). Pour
 repartir de zéro : `docker compose down -v`.
+
+## Production (VPS, HTTPS via Traefik existant)
+
+Si le serveur a déjà un reverse proxy Traefik (fourni avec un `certresolver`
+Let's Encrypt nommé `letsencrypt` et l'entrypoint `websecure`), les services
+portent déjà les labels `traefik.*` nécessaires. Il suffit de renseigner un
+`.env` à la racine :
+
+```bash
+FRONTEND_DOMAIN=mondomaine.example
+BACKEND_DOMAIN=api.mondomaine.example
+NEXT_PUBLIC_STRAPI_URL=https://api.mondomaine.example
+```
+
+puis de lancer avec la surcouche production, qui rend les ports directs
+injoignables publiquement (Traefik atteint chaque conteneur via le réseau
+Docker interne, pas via ces ports) :
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+```
+
+Le certificat est émis automatiquement au premier accès HTTPS (défi HTTP-01,
+donc `FRONTEND_DOMAIN`/`BACKEND_DOMAIN` doivent déjà pointer vers le serveur
+en DNS avant de démarrer).
